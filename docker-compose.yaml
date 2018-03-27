@@ -1,12 +1,21 @@
 version: "3.5"
 
 services:
+  chronograf:
+    image: chronograf:1.4-alpine
+    command: ["chronograf", "--influxdb-url=http://influxdb:8086"]
+    networks:
+      - tickg
+    ports:
+      - "8888:8888"
+    volumes:
+      - "./chronograf:/var/lib/chronograf"
   influxdb:
     image: influxdb:1.5-alpine
     ports:
       - "8086:8086"
     networks:
-      - tig
+      - tickg
     volumes:
       - "./influxdb:/var/lib/influxdb"
   grafana:
@@ -14,18 +23,28 @@ services:
     ports:
       - "3000:3000"
     networks:
-      - tig
+      - tickg
     volumes:
       - "./grafana:/var/lib/grafana"
+  kapacitor:
+    image: kapacitor:1.4-alpine
+    environment:
+      - KAPACITOR_INFLUXDB_0_URLS_0=http://influxdb:8086
+    ports:
+      - "9092:9092"
+    networks:
+      - tickg
+    volumes:
+      - "./kapacitor:/var/lib/kapacitor"
   telegraf:
     image: telegraf:1.5-alpine
     ports:
       - "8125:8125/udp"
     networks:
-      - tig
+      - tickg
     volumes:
       - "./telegraf.conf:/etc/telegraf/telegraf.conf"
 
 networks:
-  tig:
-    name: tig
+  tickg:
+    name: tickg
