@@ -1,5 +1,7 @@
 # TICK/G Stack
 
+This project is a docker-compose implementation of the following tools, meant for local development and learning.
+
 The "TICK Stack" is a real-time monitoring/analytics solutions from [influxdata](https://www.influxdata.com/). It includes:
 - Telegraf: a plugin-driven server agent for collecting & reporting metrics
 - InfluxDB: a time-series database
@@ -7,8 +9,6 @@ The "TICK Stack" is a real-time monitoring/analytics solutions from [influxdata]
 - Kapacitor: a framework for ETL jobs and alerts
 
 [Grafana](https://grafana.com/) is an independent application for data analytics, visualization, and alerting. It can read from InfluxDB (basically replacing Chronograf and Kapacitor in the TICK stack), as well as other data sources.
-
-This project is a docker-compose implementation of the above tools, meant for experimentation and local development.
 
 
 ## Quickstart
